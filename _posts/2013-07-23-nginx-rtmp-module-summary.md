@@ -450,4 +450,4 @@ nginx-rtmp-module项目实现的是一组模块，这里为了描述方便，仅
 ##参考：
 Nginx模块开发入门 [http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html](http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html)
 
-Emiller's Guide To Nginx Module Development [http://www.evanmiller.org/nginx-modules-guide.html](Emiller's Guide To Nginx Module Development)
+Emiller's Guide To Nginx Module Development [http://www.evanmiller.org/nginx-modules-guide.html](http://www.evanmiller.org/nginx-modules-guide.html)
