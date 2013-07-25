@@ -3,7 +3,7 @@ layout: post
 title: "nginx-rtmp-module summary"
 description: ""
 category: 
-tags: []
+tags: [nginx, rtmp]
 ---
 {% include JB/setup %}
 
@@ -446,6 +446,7 @@ nginx-rtmp-module项目实现的是一组模块，这里为了描述方便，仅
 	}
 
 ### TODO 接受PUSH RTMP流：
+
 
 ##参考：
 Nginx模块开发入门 [http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html](http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html)
