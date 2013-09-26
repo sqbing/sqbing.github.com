@@ -35,3 +35,50 @@ ngx_open_file()是对open()的简单封装，如下：
 	#endif
 
 所以，在调用这个函数打开文件时，除了要用ngx_str_t封装文件路径，还要注意这个路径一定要用\0结尾。
+
+## tips
+1. SPS和PPS何时发送？
+
+	IDR(nalu_type=5)之前发送
+
+2. PMT和PAT如何构造？
+
+	PMT和PAT为固定字段，每GOP发送一次即可。
+
+3. 加入条带分割NAL头部对现有的H.264数据有何影响？
+
+	目前看无影响，每一sample前发送条带分割NAL(nalu_type=9)
+
+4. 码流和网络流形式的NAL在转换时需要注意哪些？
+
+	一般情况下发送0x00 00 00 01，仅在sample的非首slice时发送0x00 00 01
+
+5. AAC头部是否需要修改？
+
+	AAC需要使用ADST封装
+
+6. ADST包含哪些参数？从MP4文件的何box中读取参数？
+
+	profile: (object_type - 1)
+
+	sampling frequency: sample_rate_index
+	
+	channel configuration: channels
+	
+	通过mp4a->esds读取上述参数
+
+7. 音频数据如何汇总成一个PES包再发送，而不是每一个sample封装一个PES？
+
+	音频打包到一个PES再发送，大小为2930
+
+8. 生成m3u8时如何分割？
+
+	以GOP为分割
+
+9. aac的duration为什么固定是1024？遇到非固定duration的aac应如何处理？
+
+	aac规定每个frame包含1024个samples；忽略stts中的delta，固定输出1024
+
+10. MP4中的elst atom应如何处理？
+
+	pts -= elst_start_time
