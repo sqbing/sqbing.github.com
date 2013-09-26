@@ -3,7 +3,7 @@ layout: post
 title: "Something About Nginx and HLS"
 description: ""
 category: 
-tags: []
+tags: [nginx, HLS]
 ---
 {% include JB/setup %}
 
