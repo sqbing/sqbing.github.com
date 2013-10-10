@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "boost::property_tree threadsafe"
-description: ""
+description: "增加宏定义解决boost::property_tree的线程安全问题"
 category: 
 tags: [boost, property_tree, read_json, threadsafe]
 ---

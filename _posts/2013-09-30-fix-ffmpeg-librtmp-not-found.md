@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fix: librtmp not found in ffmpeg"
-description: ""
+description: "解决编译ffmpeg过程中出现的librtmp not found错误"
 category: 
 tags: [ffmpeg, librtmp]
 ---

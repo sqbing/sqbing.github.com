@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fix: Nexus 7(2013) Wifi OTG Storage Issue"
-description: ""
+description: "解决二代N7无法使用OTG存储设备的问题"
 category: 
 tags: [Nexus, OTG]
 ---
@@ -22,3 +22,11 @@ tags: [Nexus, OTG]
 9. Tap OK to Power Off
 10. Power On（开机）
 11. Repeat steps 8-10 until you see this prompt or NMI opens automatically.  If you have repeated this more than 5 times see below.\*（重复8～10，直到Nexus Photo Viewer开机自动打开，并且可以浏览OTG存储设备内容，软件开发者博客提供了效果图）
+
+---
+
+2013-10-10 更新
+
+按照上述方法虽然能够解决二代N7的OTG存储设备使用问题，但是会导致机器__极其不稳定__。
+
+这种不稳定将直接导致机器__重启__，并在重启之后恢复正常，当然OTG功能又不见了……

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "nginx-rtmp-module summary"
-description: ""
+description: "总结一些在阅读代码和使用中遇到的问题"
 category: 
 tags: [nginx, rtmp]
 ---

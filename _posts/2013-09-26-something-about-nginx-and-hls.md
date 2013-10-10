@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Something About Nginx and HLS"
-description: ""
+description: "nginx作为hls服务器时需要考虑的问题"
 category: 
 tags: [nginx, HLS]
 ---

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "关于"
-description: ""
+description: "Yet another software developer's blog."
 ---
 {% include JB/setup %}
 

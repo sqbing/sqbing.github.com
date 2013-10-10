@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Delpoy Bottle To GAE"
-description: ""
+description: "少走一些弯路"
 category: 
 tags: [bottle, GAE]
 ---

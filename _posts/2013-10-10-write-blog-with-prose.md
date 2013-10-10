@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Write blog with prose.io
-description: ""
+description: "尝试使用porse.io维护github pages"
 category: null
 tags: []
 published: true
