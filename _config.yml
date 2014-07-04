@@ -17,6 +17,7 @@ author :
   github : sqbing
   twitter : sqbing
   feedburner : feedname
+  about_path : /
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
