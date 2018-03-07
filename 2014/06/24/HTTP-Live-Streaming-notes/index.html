@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP Live Streaming 笔记 | 早起</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Playlist m3u8：扩展的M3U文件，以行分割，每一行结尾是LF或者CR LF。每一行表示一个URI，空行（被忽略）或者以#开头（注释或者tag/标签）。不能包含空格（？）。 URI：表示一个分片或者一个playlist文件。可能是相对路径，若是，则根据该playlist路径拼凑完整路径。 Media Playlist：仅包含分片的palylist Master Playlist：仅包含p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP Live Streaming 笔记">
+<meta property="og:url" content="http://sqbing.github.io/2014/06/24/HTTP-Live-Streaming-notes/index.html">
+<meta property="og:site_name" content="早起">
+<meta property="og:description" content="Playlist m3u8：扩展的M3U文件，以行分割，每一行结尾是LF或者CR LF。每一行表示一个URI，空行（被忽略）或者以#开头（注释或者tag/标签）。不能包含空格（？）。 URI：表示一个分片或者一个playlist文件。可能是相对路径，若是，则根据该playlist路径拼凑完整路径。 Media Playlist：仅包含分片的palylist Master Playlist：仅包含p">
+<meta property="og:updated_time" content="2018-03-07T05:13:55.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Live Streaming 笔记">
+<meta name="twitter:description" content="Playlist m3u8：扩展的M3U文件，以行分割，每一行结尾是LF或者CR LF。每一行表示一个URI，空行（被忽略）或者以#开头（注释或者tag/标签）。不能包含空格（？）。 URI：表示一个分片或者一个playlist文件。可能是相对路径，若是，则根据该playlist路径拼凑完整路径。 Media Playlist：仅包含分片的palylist Master Playlist：仅包含p">
+  
+    <link rel="alternate" href="/atom.xml" title="早起" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">早起</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sqbing.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-HTTP-Live-Streaming-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/24/HTTP-Live-Streaming-notes/" class="article-date">
+  <time datetime="2014-06-23T16:00:00.000Z" itemprop="datePublished">2014-06-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP Live Streaming 笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Playlist"><a href="#Playlist" class="headerlink" title="Playlist"></a>Playlist</h1><ul>
+<li>m3u8：扩展的M3U文件，以行分割，每一行结尾是LF或者CR LF。每一行表示一个URI，空行（被忽略）或者以#开头（注释或者tag/标签）。不能包含空格（？）。</li>
+<li>URI：表示一个分片或者一个playlist文件。可能是相对路径，若是，则根据该playlist路径拼凑完整路径。</li>
+<li>Media Playlist：仅包含分片的palylist</li>
+<li>Master Playlist：仅包含playlist的playlist</li>
+<li>Tags：以#EXT开头，所有其他的以#开头的行均是注释。</li>
+<li>duartion：所有分片duration之和</li>
+<li><p>编码：HTTP Content-Type “application/vnd.apple.mpegurl”的m3u8文件为UTF-8编码，HTTP Content-Type “audio/mpegurl”的m3u文件为US-ASCII编码</p>
+</li>
+<li><p>AttributeName=AttributeValue,AttributeName=AttributeValue,…</p>
+<p>  AttributeName不能包含空格，只能由A～Z和”-“组成，同一个AttributeName在一个attribute list中不能重复。<br>  AttributeValue只能是10进制数字，十六进制数字(0x/0X)，十进制浮点数，引号包裹的字符串（“），没有引号包裹的可枚举字符串（？），十进制分辨率(widthxheight)</p>
+</li>
+</ul>
+<h2 id="EXTM3U"><a href="#EXTM3U" class="headerlink" title="EXTM3U"></a>EXTM3U</h2><p>区分M3U8和M8U文件的标签</p>
+<h2 id="EXTINF"><a href="#EXTINF" class="headerlink" title="EXTINF"></a>EXTINF</h2><p>标识分片的duration，格式：</p>
+<pre><code>#EXTINF:&lt;duration&gt;,&lt;value&gt;
+</code></pre><p>duration是十进制数字或者十进制浮点数，单位为秒，协议版本号低于3的仅使用十进制证书<br>value可选</p>
+<h2 id="EXT-X-BYTERANGE-o"><a href="#EXT-X-BYTERANGE-o" class="headerlink" title="EXT-X-BYTERANGE:\[@o]"></a>EXT-X-BYTERANGE:\<n>[@o]</n></h2><p>表示sub-range of resource<br>n表示sub-range长度，单位为字节<br>o是一个十进制整数，标识sub-range的起始位置，从resource的开始位置的偏移量，单位为字节<br>协议版本号从4开始使用该标签</p>
+<h2 id="EXT-X-TARGETDURATION"><a href="#EXT-X-TARGETDURATION" class="headerlink" title="EXT-X-TARGETDURATION:\"></a>EXT-X-TARGETDURATION:\<s></s></h2><p>表示playlist文件中可能出现的最大duration<br>s是最大duration，以秒为单位</p>
+<h2 id="EXT-X-MEDIA-SEQUENCE"><a href="#EXT-X-MEDIA-SEQUENCE" class="headerlink" title="EXT-X-MEDIA-SEQUENCE:\"></a>EXT-X-MEDIA-SEQUENCE:\<number></number></h2><p>标识playlist文件中出现的第一个sequence number，仅出现一次</p>
+<h2 id="EXT-X-KEY"><a href="#EXT-X-KEY" class="headerlink" title="EXT-X-KEY:"></a>EXT-X-KEY:<attribute-list></attribute-list></h2><p>作用域到下一个包含相同KEYFORMAT attribute的EXT-X-KEY标签之前<br>METHOD：NONE, AES-128, SAMPLE-AES，若为NONE，则必须包含URI,VI,KEYFORMAT,KEYFORMATVERSIONS；若为AES-128，则必须包含URI，可选VI；若为SAMPLE-AES，可选VI<br>URI：key的URI<br>IV：Initialization Vector，十六进制整数，协议从版本号2开始包含此变量<br>KEYFORMAT：引用字符串<br>KEYFORMATVERSIONS：引用字符串，出现在协议版本号5中</p>
+<h2 id="EXT-X-PROGRAM-DATE-TIME-YYYY-MM-DDThh-mm-ssZ"><a href="#EXT-X-PROGRAM-DATE-TIME-YYYY-MM-DDThh-mm-ssZ" class="headerlink" title="EXT-X-PROGRAM-DATE-TIME:YYYY-MM-DDThh:mm:ssZ"></a>EXT-X-PROGRAM-DATE-TIME:<a href="YYYY-MM-DDThh:mm:ssZ" target="_blank" rel="noopener">YYYY-MM-DDThh:mm:ssZ</a></h2><p>接下来的第一个的分片时间</p>
+<h2 id="EXT-X-ALLOW-CACHE-lt-YES-NO-gt"><a href="#EXT-X-ALLOW-CACHE-lt-YES-NO-gt" class="headerlink" title="EXT-X-ALLOW-CACHE:&lt;YES|NO&gt;"></a>EXT-X-ALLOW-CACHE:&lt;YES|NO&gt;</h2><p>客户端是否可以缓存分片用于回放，仅能出现一次</p>
+<h2 id="EXT-X-PLAYLIST-TYPE-lt-EVENT-VOD-gt"><a href="#EXT-X-PLAYLIST-TYPE-lt-EVENT-VOD-gt" class="headerlink" title="EXT-X-PLAYLIST-TYPE:&lt;EVENT|VOD&gt;"></a>EXT-X-PLAYLIST-TYPE:&lt;EVENT|VOD&gt;</h2><p>playlist是否可修改</p>
+<h2 id="EXT-X-ENDLIST"><a href="#EXT-X-ENDLIST" class="headerlink" title="EXT-X-ENDLIST"></a>EXT-X-ENDLIST</h2><p>表示不再有分片，仅能出现一次</p>
+<h2 id="EXT-X-MEDIA"><a href="#EXT-X-MEDIA" class="headerlink" title="EXT-X-MEDIA:"></a>EXT-X-MEDIA:<attribute-list></attribute-list></h2><p>用于表示同一内容的不同选择(alternative reditions)，比如只包含音频的英语，法语和西班牙语音轨，或者仅包含视频的两个摄像机机位，format相同<br>URI可选<br>TYPE三选一，VIDEO/AUDIO/SUBTITLES，同一GROUP的必须相同<br>GROUP-ID引用字符串<br>LANGUAGE可选 引用字符串，参考RFC 5646，若AUTOSELECT为YES，则LANGUAGE必须有效<br>NAME引用字符串，同一GROUP的必须不同<br>DEFAULT二选一YES/NO，同一GROUP仅有一个为YES<br>AUTOSELECT二选一YES/NO<br>FORCED二选一YES/NO 可选<br>CHARACTERISTICS引用字符串 可选</p>
+<h2 id="EXT-X-STREAM-INF"><a href="#EXT-X-STREAM-INF" class="headerlink" title="EXT-X-STREAM-INF:\"></a>EXT-X-STREAM-INF:<attribute-list>\<uri></uri></attribute-list></h2><p>表示URI为playlist<br>BANDWIDTH必须包含，十进制整数，单位为比特<br>PROGRAM-ID Master Playlist中通过不同的PROGRAM-ID表示相同presentation的不同编码<br>CODECS引用字符串，value通过逗号分割，建议包含<br>RESOLUTION 视频分辨率<br>AUDIO 引用字符串，和GROUP-ID相同<br>VIDEO 引用字符串，和GROUP-ID相同<br>SUBTITLES 引用字符串，和GROUP-ID相同</p>
+<h2 id="EXT-X-DISCONTUNUITY"><a href="#EXT-X-DISCONTUNUITY" class="headerlink" title="EXT-X-DISCONTUNUITY"></a>EXT-X-DISCONTUNUITY</h2><p>媒体信息发生变化，媒体信息包括文件格式，tracks的数量和类型，编码参数，编码顺序(encoding sequence)，时间戳顺序(timestamp sequence)</p>
+<h2 id="EXT-X-I-FRAMES-ONLY"><a href="#EXT-X-I-FRAMES-ONLY" class="headerlink" title="EXT-X-I-FRAMES-ONLY"></a>EXT-X-I-FRAMES-ONLY</h2><p>表示分片只包含I帧，协议从版本号4开始包含此标签</p>
+<h2 id="EXT-X-MAP"><a href="#EXT-X-MAP" class="headerlink" title="EXT-X-MAP:"></a>EXT-X-MAP:<attribute-list></attribute-list></h2><p>标识如何获取分片的PAT/PMT，对该标签之后的分片有效<br>仅和EXT-X-I-FRAMES-ONLY一起出现，建议只用在没有PAT/PMT开头的分片<br>协议从版本号5开始使用该标签<br>URI引用字符串<br>BYTERANGE引用字符串</p>
+<h2 id="EXT-X-I-FRAME-STREAM-INF"><a href="#EXT-X-I-FRAME-STREAM-INF" class="headerlink" title="EXT-X-I-FRAME-STREAM-INF:"></a>EXT-X-I-FRAME-STREAM-INF:<attribute-list></attribute-list></h2><p>表示I帧列表<br>URI<br>BANDWIDTH</p>
+<h2 id="EXT-X-VERSION"><a href="#EXT-X-VERSION" class="headerlink" title="EXT-X-VERSION:"></a>EXT-X-VERSION:<n></n></h2><p>协议版本号</p>
+<h1 id="额外的注意："><a href="#额外的注意：" class="headerlink" title="额外的注意："></a>额外的注意：</h1><ol>
+<li>media segment：分片</li>
+<li>编码 MPEG-2 Transport Stream/MPEG audio elementary stream/WebVTT（字幕）</li>
+<li>TS分片必须仅包含一个MPEG-2 Program。每一个TS分片都应当以PAT和PMT开头。视频分片必须包含一个I帧（完整GOP？）</li>
+<li>TS或者audio elementacontentry stream分片必须保证sequence number连续，时间戳连续，除非是第一个分片或者出现了EXT-X-DISCONTINUITY标签。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sqbing.github.io/2014/06/24/HTTP-Live-Streaming-notes/" data-id="cjegmyn75000lqsfok3b6rgnn" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/06/24/MP4-to-HLS-based-on-nginx-http-mp4-module/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          MP4 to HLS based on nginx-http-mp4-module
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/11/27/riders_resume/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Rider&#39;s Resume</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAE/">GAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HLS/">HLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OTG/">OTG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bottle/">bottle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fanfou/">fanfou</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/librtmp/">librtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read-json/">read_json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtmp/">rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threadsafe/">threadsafe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xauth/">xauth</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GAE/" style="font-size: 10px;">GAE</a> <a href="/tags/HLS/" style="font-size: 10px;">HLS</a> <a href="/tags/Nexus/" style="font-size: 10px;">Nexus</a> <a href="/tags/OTG/" style="font-size: 10px;">OTG</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/boost/" style="font-size: 10px;">boost</a> <a href="/tags/bottle/" style="font-size: 10px;">bottle</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/fanfou/" style="font-size: 10px;">fanfou</a> <a href="/tags/ffmpeg/" style="font-size: 20px;">ffmpeg</a> <a href="/tags/librtmp/" style="font-size: 10px;">librtmp</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/property-tree/" style="font-size: 10px;">property_tree</a> <a href="/tags/read-json/" style="font-size: 10px;">read_json</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/threadsafe/" style="font-size: 10px;">threadsafe</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/xauth/" style="font-size: 10px;">xauth</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/07/migrate-to-hexo/">migrate to hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/cpp-cast/">C++ cast备忘</a>
+          </li>
+        
+          <li>
+            <a href="/2015/04/01/android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/24/MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
+          </li>
+        
+          <li>
+            <a href="/2014/06/24/HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 [object Object]<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

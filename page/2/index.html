@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sqbing.github.io"></form>
@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2013-09-29-fix-nexus-7-2013-otg-storage" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-fix-ffmpeg-librtmp-not-found" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.303Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/09/30/fix-ffmpeg-librtmp-not-found/" class="article-date">
+  <time datetime="2013-09-29T16:00:00.000Z" itemprop="datePublished">2013-09-30</time>
 </a>
     
   </div>
@@ -75,7 +75,55 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/">Fix: Nexus 7(2013) Wifi OTG Storage Issue</a>
+      <a class="article-title" href="/2013/09/30/fix-ffmpeg-librtmp-not-found/">Fix: librtmp not found in ffmpeg</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>服务器的yum坏了，运维的同事说“无解”，好吧，好吧……</p>
+<p>手动编译ffmpeg，配置参数为</p>
+<pre><code>./configure --enable-libfaac --enable-libx264 --enable-nonfree --enable-gpl --enable-librtmp
+</code></pre><p>然后就一直停在</p>
+<pre><code>“librtmp not found”
+</code></pre><p>下载编译了librtmp，搞定了头文件和库的链接还是报这个错，检查config.log发现check_pkg_config这个调用出错了，再看configure，这个调用貌似是检查librtmp这个包的安装情况，也许是手动安装没有更新包信息导致的。</p>
+<p>找到configure中对应librtmp检查的那行，可能长这样</p>
+<pre><code>enabled librtmp    &amp;&amp; require_pkg_config librtmp librtmp/rtmp.h RTMP_Socket
+</code></pre><p>注释该行，再配置一次，通过了。</p>
+<p>经过这样的修改，编译时可能会报错，librtmp中的一些函数未定义，可以修改config.mak，找到EXTRALIBS这个宏，在后面追加“-lrtmp”即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sqbing.github.io/2013/09/30/fix-ffmpeg-librtmp-not-found/" data-id="cjegmyn6r000bqsfo35h2lcbx" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/librtmp/">librtmp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fix-nexus-7-2013-otg-storage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/29/fix-nexus-7-2013-otg-storage/" class="article-date">
+  <time datetime="2013-09-28T16:00:00.000Z" itemprop="datePublished">2013-09-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/29/fix-nexus-7-2013-otg-storage/">Fix: Nexus 7(2013) Wifi OTG Storage Issue</a>
     </h1>
   
 
@@ -106,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/" data-id="cjeggjf0k000btwfopu9rmyef" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/09/29/fix-nexus-7-2013-otg-storage/" data-id="cjegmyn72000iqsfo4vl9f9u7" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OTG/">OTG</a></li></ul>
@@ -118,10 +166,10 @@
 
 
   
-    <article id="post-2013-09-26-something-about-nginx-and-hls" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-something-about-nginx-and-hls" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-09-26-something-about-nginx-and-hls/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.299Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/09/26/something-about-nginx-and-hls/" class="article-date">
+  <time datetime="2013-09-25T16:00:00.000Z" itemprop="datePublished">2013-09-26</time>
 </a>
     
   </div>
@@ -132,7 +180,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-09-26-something-about-nginx-and-hls/">Something About Nginx and HLS</a>
+      <a class="article-title" href="/2013/09/26/something-about-nginx-and-hls/">Something About Nginx and HLS</a>
     </h1>
   
 
@@ -198,7 +246,7 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-09-26-something-about-nginx-and-hls/" data-id="cjeggjf0e0007twfoztu40tip" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/09/26/something-about-nginx-and-hls/" data-id="cjegmyn6n0007qsfoymijygll" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HLS/">HLS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -210,10 +258,10 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
 
 
   
-    <article id="post-2013-07-27-boost-property_tree-threadsafe" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-boost-property_tree-threadsafe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-07-27-boost-property_tree-threadsafe/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.295Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/07/27/boost-property_tree-threadsafe/" class="article-date">
+  <time datetime="2013-07-26T16:00:00.000Z" itemprop="datePublished">2013-07-27</time>
 </a>
     
   </div>
@@ -224,7 +272,7 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-07-27-boost-property_tree-threadsafe/">boost::property_tree threadsafe</a>
+      <a class="article-title" href="/2013/07/27/boost-property_tree-threadsafe/">boost::property_tree threadsafe</a>
     </h1>
   
 
@@ -242,7 +290,7 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-07-27-boost-property_tree-threadsafe/" data-id="cjeggjf050005twfo5ryn36kl" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/07/27/boost-property_tree-threadsafe/" data-id="cjegmyn6o0008qsfoh6k9asu9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/boost/">boost</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/read-json/">read_json</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/threadsafe/">threadsafe</a></li></ul>
@@ -254,10 +302,10 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
 
 
   
-    <article id="post-2013-07-23-nginx-rtmp-module-summary" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-nginx-rtmp-module-summary" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-07-23-nginx-rtmp-module-summary/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.291Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/07/23/nginx-rtmp-module-summary/" class="article-date">
+  <time datetime="2013-07-22T16:00:00.000Z" itemprop="datePublished">2013-07-23</time>
 </a>
     
   </div>
@@ -268,7 +316,7 @@ ngx_open_cached_file(ngx_open_file_cache_t *cache,
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-07-23-nginx-rtmp-module-summary/">nginx-rtmp-module summary</a>
+      <a class="article-title" href="/2013/07/23/nginx-rtmp-module-summary/">nginx-rtmp-module summary</a>
     </h1>
   
 
@@ -707,7 +755,7 @@ ngx_rtmp_core_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf/*srv_conf*/)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-07-23-nginx-rtmp-module-summary/" data-id="cjeggjf0f0008twfo3zb2e3zs" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/07/23/nginx-rtmp-module-summary/" data-id="cjegmyn690003qsfo91zuv9pt" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rtmp/">rtmp</a></li></ul>
@@ -719,10 +767,10 @@ ngx_rtmp_core_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf/*srv_conf*/)
 
 
   
-    <article id="post-2013-07-20-delpoy-bottle-to-gae" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-delpoy-bottle-to-gae" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-07-20-delpoy-bottle-to-gae/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.287Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/07/20/delpoy-bottle-to-gae/" class="article-date">
+  <time datetime="2013-07-19T16:00:00.000Z" itemprop="datePublished">2013-07-20</time>
 </a>
     
   </div>
@@ -733,7 +781,7 @@ ngx_rtmp_core_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf/*srv_conf*/)
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-07-20-delpoy-bottle-to-gae/">Delpoy Bottle To GAE</a>
+      <a class="article-title" href="/2013/07/20/delpoy-bottle-to-gae/">Delpoy Bottle To GAE</a>
     </h1>
   
 
@@ -778,7 +826,7 @@ bottle.run(app=app, server=&apos;gae&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-07-20-delpoy-bottle-to-gae/" data-id="cjeggjezy0004twfoy2jzs69m" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/07/20/delpoy-bottle-to-gae/" data-id="cjegmyn6b0004qsfoh84rkzv3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAE/">GAE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bottle/">bottle</a></li></ul>
@@ -790,10 +838,10 @@ bottle.run(app=app, server=&apos;gae&apos;)
 
 
   
-    <article id="post-2013-04-12-cpp_standard_library_string_find_and_npos_usage" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cpp_standard_library_string_find_and_npos_usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-04-12-cpp_standard_library_string_find_and_npos_usage/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.280Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/04/12/cpp_standard_library_string_find_and_npos_usage/" class="article-date">
+  <time datetime="2013-04-11T16:00:00.000Z" itemprop="datePublished">2013-04-12</time>
 </a>
     
   </div>
@@ -804,7 +852,7 @@ bottle.run(app=app, server=&apos;gae&apos;)
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-04-12-cpp_standard_library_string_find_and_npos_usage/">std::string::find和std::string::npos的使用备忘</a>
+      <a class="article-title" href="/2013/04/12/cpp_standard_library_string_find_and_npos_usage/">std::string::find和std::string::npos的使用备忘</a>
     </h1>
   
 
@@ -827,7 +875,7 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-04-12-cpp_standard_library_string_find_and_npos_usage/" data-id="cjeggjezt0002twfoanb5e150" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/04/12/cpp_standard_library_string_find_and_npos_usage/" data-id="cjegmyn6k0006qsfosby0tgwp" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -837,10 +885,10 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
 
 
   
-    <article id="post-2013-04-03-deps" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-deps" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-04-03-deps/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.276Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/04/03/deps/" class="article-date">
+  <time datetime="2013-04-02T16:00:00.000Z" itemprop="datePublished">2013-04-03</time>
 </a>
     
   </div>
@@ -851,7 +899,7 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-04-03-deps/">一些.deps文件未更新导致的问题</a>
+      <a class="article-title" href="/2013/04/03/deps/">一些.deps文件未更新导致的问题</a>
     </h1>
   
 
@@ -866,7 +914,7 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-04-03-deps/" data-id="cjeggjezl0001twfoqb3mwr8m" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/04/03/deps/" data-id="cjegmyn680002qsfo0f1l8dtn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -876,10 +924,10 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
 
 
   
-    <article id="post-2013-04-01-unreliable-backtrace" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-unreliable-backtrace" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-04-01-unreliable-backtrace/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.270Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/04/01/unreliable-backtrace/" class="article-date">
+  <time datetime="2013-03-31T16:00:00.000Z" itemprop="datePublished">2013-04-01</time>
 </a>
     
   </div>
@@ -890,7 +938,7 @@ if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-04-01-unreliable-backtrace/">不靠谱的backtrace</a>
+      <a class="article-title" href="/2013/04/01/unreliable-backtrace/">不靠谱的backtrace</a>
     </h1>
   
 
@@ -937,7 +985,7 @@ int main(int argc, char **argv)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-04-01-unreliable-backtrace/" data-id="cjeggjeza0000twfo0qlajua1" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/04/01/unreliable-backtrace/" data-id="cjegmyn5w0000qsfo4opj09pg" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -947,10 +995,10 @@ int main(int argc, char **argv)
 
 
   
-    <article id="post-2013-03-26-new-post" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-new-post" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/06/2013-03-26-new-post/" class="article-date">
-  <time datetime="2018-03-06T08:20:10.265Z" itemprop="datePublished">2018-03-06</time>
+    <a href="/2013/03/26/new-post/" class="article-date">
+  <time datetime="2013-03-25T16:00:00.000Z" itemprop="datePublished">2013-03-26</time>
 </a>
     
   </div>
@@ -961,7 +1009,7 @@ int main(int argc, char **argv)
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/2013-03-26-new-post/">new post</a>
+      <a class="article-title" href="/2013/03/26/new-post/">new post</a>
     </h1>
   
 
@@ -974,7 +1022,7 @@ int main(int argc, char **argv)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2018/03/06/2013-03-26-new-post/" data-id="cjeggjezw0003twfohtsdfccq" class="article-share-link">Share</a>
+      <a data-url="http://sqbing.github.io/2013/03/26/new-post/" data-id="cjegmyn620001qsfoai1mvc4b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -998,7 +1046,7 @@ int main(int argc, char **argv)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAE/">GAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HLS/">HLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OTG/">OTG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bottle/">bottle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fanfou/">fanfou</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/librtmp/">librtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read-json/">read_json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtmp/">rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threadsafe/">threadsafe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xauth/">xauth</a></li></ul>
     </div>
@@ -1008,7 +1056,7 @@ int main(int argc, char **argv)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/GAE/" style="font-size: 10px;">GAE</a> <a href="/tags/HLS/" style="font-size: 10px;">HLS</a> <a href="/tags/Nexus/" style="font-size: 10px;">Nexus</a> <a href="/tags/OTG/" style="font-size: 10px;">OTG</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/boost/" style="font-size: 10px;">boost</a> <a href="/tags/bottle/" style="font-size: 10px;">bottle</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/fanfou/" style="font-size: 10px;">fanfou</a> <a href="/tags/ffmpeg/" style="font-size: 20px;">ffmpeg</a> <a href="/tags/librtmp/" style="font-size: 10px;">librtmp</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/property-tree/" style="font-size: 10px;">property_tree</a> <a href="/tags/read-json/" style="font-size: 10px;">read_json</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/threadsafe/" style="font-size: 10px;">threadsafe</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/xauth/" style="font-size: 10px;">xauth</a>
     </div>
@@ -1019,7 +1067,7 @@ int main(int argc, char **argv)
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li></ul>
     </div>
   </div>
 
@@ -1027,28 +1075,28 @@ int main(int argc, char **argv)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2018/03/06/2015-12-22-cpp-cast/">C++ cast备忘</a>
+            <a href="/2018/03/07/migrate-to-hexo/">migrate to hexo</a>
           </li>
         
           <li>
-            <a href="/2018/03/06/2015-04-01-android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
+            <a href="/2015/12/22/cpp-cast/">C++ cast备忘</a>
           </li>
         
           <li>
-            <a href="/2018/03/06/2014-06-24-MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
+            <a href="/2015/04/01/android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
           </li>
         
           <li>
-            <a href="/2018/03/06/2014-06-24-HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
+            <a href="/2014/06/24/MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
           </li>
         
           <li>
-            <a href="/2018/03/06/2013-11-27-xauth_with_node/">Node&#39;s XAuth Support</a>
+            <a href="/2014/06/24/HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
           </li>
         
       </ul>
@@ -1064,7 +1112,7 @@ int main(int argc, char **argv)
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 [object Object]<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
