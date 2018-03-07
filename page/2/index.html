@@ -1,1140 +1,261 @@
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  
-  <title>早起</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
 <meta property="og:title" content="早起">
 <meta property="og:url" content="http://sqbing.github.io/page/2/index.html">
 <meta property="og:site_name" content="早起">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="早起">
-  
-    <link rel="alternate" href="/atom.xml" title="早起" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>早起</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">早起</a>
-      </h1>
+<body class="max-width mx-auto px3">
+    
+    <div class="content index my4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>早起</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/about/">About</a></li>
+       
+        <li><a href="/archives/">Writing</a></li>
+       
+        <li><a href="/projects_url">Projects</a></li>
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sqbing.github.io"></form>
-      </div>
-    </div>
+    </ul>
   </div>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-fix-ffmpeg-librtmp-not-found" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/09/30/fix-ffmpeg-librtmp-not-found/" class="article-date">
-  <time datetime="2013-09-29T16:00:00.000Z" itemprop="datePublished">2013-09-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+
         
+        <section id="about">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/09/30/fix-ffmpeg-librtmp-not-found/">Fix: librtmp not found in ffmpeg</a>
-    </h1>
   
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>服务器的yum坏了，运维的同事说“无解”，好吧，好吧……</p>
-<p>手动编译ffmpeg，配置参数为</p>
-<pre><code>./configure --enable-libfaac --enable-libx264 --enable-nonfree --enable-gpl --enable-librtmp
-</code></pre><p>然后就一直停在</p>
-<pre><code>“librtmp not found”
-</code></pre><p>下载编译了librtmp，搞定了头文件和库的链接还是报这个错，检查config.log发现check_pkg_config这个调用出错了，再看configure，这个调用貌似是检查librtmp这个包的安装情况，也许是手动安装没有更新包信息导致的。</p>
-<p>找到configure中对应librtmp检查的那行，可能长这样</p>
-<pre><code>enabled librtmp    &amp;&amp; require_pkg_config librtmp librtmp/rtmp.h RTMP_Socket
-</code></pre><p>注释该行，再配置一次，通过了。</p>
-<p>经过这样的修改，编译时可能会报错，librtmp中的一些函数未定义，可以修改config.mak，找到EXTRALIBS这个宏，在后面追加“-lrtmp”即可。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/09/30/fix-ffmpeg-librtmp-not-found/" data-id="cjegmyn6r000bqsfo35h2lcbx" class="article-share-link">Partager</a>
+    <p>
+      Find me on
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/librtmp/">librtmp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fix-nexus-7-2013-otg-storage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/09/29/fix-nexus-7-2013-otg-storage/" class="article-date">
-  <time datetime="2013-09-28T16:00:00.000Z" itemprop="datePublished">2013-09-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+      
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/09/29/fix-nexus-7-2013-otg-storage/">Fix: Nexus 7(2013) Wifi OTG Storage Issue</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需要安装Nexus Photo Viewer(<a href="https://play.google.com/store/apps/details?id=com.homeysoft.nexususb.viewer" target="_blank" rel="noopener">Google Play</a>)，依据软件开发者的博客(<a href="http://nexususb.blogspot.com/" target="_blank" rel="noopener">blogspot</a>)提供的解决方案即可解决。</p>
-<p>下面是软件开发者提供的解决步骤：</p>
-<ol>
-<li>Hold the device in Portrait Mode（竖屏）</li>
-<li>Open Android Settings and make the following <strong>temporary</strong> changes（以下步骤修改的配置，可在问题解决后恢复）</li>
-<li>Under Security -&gt; Lock Screen.  Select None（取消密码、图案锁屏等）</li>
-<li>Under Accessibility -&gt; Auto-rotate screen.  Make sure it is NOT checked（取消自动旋转屏幕）</li>
-<li><strong>(Nexus 7 2013 Only)</strong> Under Language and input -&gt; English (United States)（<strong>语言改为美式英文</strong>）</li>
-<li>Open NMI/NPV manually via the icon.（打开Nexus Photo Viewer）</li>
-<li>Connect the OTG and Flash/Pen Drive（连接OTS存储设备）</li>
-<li>Press and Hold Power until you see “Power Off”（关机）</li>
-<li>Tap OK to Power Off</li>
-<li>Power On（开机）</li>
-<li>Repeat steps 8-10 until you see this prompt or NMI opens automatically.  If you have repeated this more than 5 times see below.*（重复8～10，直到Nexus Photo Viewer开机自动打开，并且可以浏览OTG存储设备内容，软件开发者博客提供了效果图）</li>
-</ol>
-<hr>
-<p>2013-10-10 更新</p>
-<p>按照上述方法虽然能够解决二代N7的OTG存储设备使用问题，但是会导致机器<strong>极其不稳定</strong>。</p>
-<p>这种不稳定将直接导致机器<strong>重启</strong>，并在重启之后恢复正常，当然OTG功能又不见了……</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/09/29/fix-nexus-7-2013-otg-storage/" data-id="cjegmyn72000iqsfo4vl9f9u7" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OTG/">OTG</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-something-about-nginx-and-hls" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/09/26/something-about-nginx-and-hls/" class="article-date">
-  <time datetime="2013-09-25T16:00:00.000Z" itemprop="datePublished">2013-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          <a class="icon" target="_blank" href="http://github.com/probberechts/cactus-dark">
+            <i class="fab fa-github"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/09/26/something-about-nginx-and-hls/">Something About Nginx and HLS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>不涉及具体实现，只是总结一下近半个月来研究nginx和HLS以及综合两者时遇到的一些困难。</p>
-<h2 id="ngx-open-cached-file"><a href="#ngx-open-cached-file" class="headerlink" title="ngx_open_cached_file()"></a>ngx_open_cached_file()</h2><p>完整原型如下：</p>
-<pre><code>ngx_int_t
-ngx_open_cached_file(ngx_open_file_cache_t *cache, 
-    ngx_str_t *name,
-    ngx_open_file_info_t *of, 
-    ngx_pool_t *pool)
-</code></pre><p>其中的name参数比较有意思，在nginx中，ngx_str_t比u_char*多了一个长度字段。小心！这个函数内部并没有考虑name的长度，而是粗暴的调用了：</p>
-<pre><code>fd = ngx_open_file(name-&gt;data, mode, create, access);
-</code></pre><p>ngx_open_file()是对open()的简单封装，如下：</p>
-<pre><code>#ifdef __CYGWIN__
-    #define NGX_HAVE_CASELESS_FILESYSTEM  1
-    #define ngx_open_file(name, mode, create, access)\
-        open((const char *) name, mode|create|O_BINARY, access)
-#else
-    #define ngx_open_file(name, mode, create, access)\
-        open((const char *) name, mode|create, access)
-#endif
-</code></pre><p>所以，在调用这个函数打开文件时，除了要用ngx_str_t封装文件路径，还要注意这个路径一定要用\0结尾。</p>
-<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><ol>
-<li><p>SPS和PPS何时发送？</p>
-<p> IDR(nalu_type=5)之前发送</p>
-</li>
-<li><p>PMT和PAT如何构造？</p>
-<p> PMT和PAT为固定字段，每GOP发送一次即可。</p>
-</li>
-<li><p>加入条带分割NAL头部对现有的H.264数据有何影响？</p>
-<p> 目前看无影响，每一sample前发送条带分割NAL(nalu_type=9)</p>
-</li>
-<li><p>码流和网络流形式的NAL在转换时需要注意哪些？</p>
-<p> 一般情况下发送0x00 00 00 01，仅在sample的非首slice时发送0x00 00 01</p>
-</li>
-<li><p>AAC头部是否需要修改？</p>
-<p> AAC需要使用ADST封装</p>
-</li>
-<li><p>ADST包含哪些参数？从MP4文件的何box中读取参数？</p>
-<p> profile: (object_type - 1)</p>
-<p> sampling frequency: sample_rate_index</p>
-<p> channel configuration: channels</p>
-<p> 通过mp4a-&gt;esds读取上述参数</p>
-</li>
-<li><p>音频数据如何汇总成一个PES包再发送，而不是每一个sample封装一个PES？</p>
-<p> 音频打包到一个PES再发送，大小为2930</p>
-</li>
-<li><p>生成m3u8时如何分割？</p>
-<p> 以GOP为分割</p>
-</li>
-<li><p>aac的duration为什么固定是1024？遇到非固定duration的aac应如何处理？</p>
-<p> aac规定每个frame包含1024个samples；忽略stts中的delta，固定输出1024</p>
-</li>
-<li><p>MP4中的elst atom应如何处理？</p>
-<p>pts -= elst_start_time</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/09/26/something-about-nginx-and-hls/" data-id="cjegmyn6n0007qsfoymijygll" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HLS/">HLS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-boost-property_tree-threadsafe" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/07/27/boost-property_tree-threadsafe/" class="article-date">
-  <time datetime="2013-07-26T16:00:00.000Z" itemprop="datePublished">2013-07-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/07/27/boost-property_tree-threadsafe/">boost::property_tree threadsafe</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##问题描述：<br>最近程序经常崩溃，GDB调试发现全部是read_json函数调用的问题。</p>
-<p>##问题原因：<br>boost::property_tree是boost提供的文本解析库，可用于解析或生成json，xml，ini等文件。</p>
-<p>property_tree依赖grammar库，grammar在多线程环境下使用（很）可能崩溃。</p>
-<p>##问题解决：<br>引用与property_tree头文件之前定义宏：</p>
-<pre><code>#define BOOST_SPIRIT_THREADSAFE
-</code></pre><p>效果非常显著，建议把宏的定义直接写入Makefile。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/07/27/boost-property_tree-threadsafe/" data-id="cjegmyn6o0008qsfoh6k9asu9" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/boost/">boost</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/read-json/">read_json</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/threadsafe/">threadsafe</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-nginx-rtmp-module-summary" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/07/23/nginx-rtmp-module-summary/" class="article-date">
-  <time datetime="2013-07-22T16:00:00.000Z" itemprop="datePublished">2013-07-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          <a class="icon" target="_blank" href="/">
+            <i class="fab fa-twitter"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/07/23/nginx-rtmp-module-summary/">nginx-rtmp-module summary</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>##项目主页:<br><a href="https://github.com/arut/nginx-rtmp-module" target="_blank" rel="noopener">https://github.com/arut/nginx-rtmp-module</a></p>
-<p>##项目介绍：<br>nginx-rtmp-module是为nginx开发的一组模块，实现基于nginx的流媒体服务器，包括流发布，转发，录制等功能。具体参考项目主页及项目wiki。</p>
-<p>注意，该项目正在开发中，某些功能尚不稳定，代码结构也可能在将来发生较大的变化。</p>
-<p>##总结</p>
-<p>###配置解析<br>配置解析要从rtmp命令开始，这是一个顶级命令，和http、events等平级。通过阅读代码能看出来，该命令的解析参考了http的解析流程，具体代码位于nginx_rtmp.c中，如果以前对http命令解析过程有了解，相信这里也能很快理解。</p>
-<p>nginx-rtmp-module项目实现的是一组模块，这里为了描述方便，仅用短命名表示各模块，比如core模块，hls模块等，需要注意的是nginx_rtmp.c中声明的模块，这里称呼他为根模块。</p>
-<p>这是一份常见也很典型的rtmp模块配置：</p>
-<pre><code>rtmp {
-    server {
-
-        listen 1935; # 监听1935端口
-
-        application live {
-            live on; # 启用直播   
-
-            hls on;  # 启用HLS
-            hls_path /tmp/tv26; # HLS缓存路径
-
-            recorder record_tv26{ # 启用录制
-                record all; # 收录音视频
-                record_path /tmp/rec; # 收录路径
-            }   
-        }   
-    }   
-</code></pre><p>具体解析部分如下：</p>
-<pre><code>/* rtmp{}块解析函数，一切与rtmp有关的配置解析从这里开始 */
-static char *
-ngx_rtmp_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
-{
-    char                        *rv;
-    ngx_uint_t                   i, m, mi, s;
-    ngx_conf_t                   pcf;
-    ngx_array_t                  ports;
-    ngx_rtmp_listen_t           *listen;
-    ngx_rtmp_module_t           *module;
-    ngx_rtmp_conf_ctx_t         *ctx;
-    ngx_rtmp_core_srv_conf_t    *cscf, **cscfp;
-    ngx_rtmp_core_main_conf_t   *cmcf;
-
-    /* 
-    typedef struct {
-        void                  **main_conf;
-        void                  **srv_conf;
-        void                  **app_conf;
-    } ngx_rtmp_conf_ctx_t;
-     * 这个结构体再配置解析过程中见到非常多，server命令和application命令解析时也会创建一个这样的结构体，需要注意的时，这个结构体中main_conf是一次rtmp{}块解析过程中唯一的，其他命令解析到的配置将直接修改该main_conf，与另两个结构体不同。
-     */
-    ctx = ngx_pcalloc(cf-&gt;pool, sizeof(ngx_rtmp_conf_ctx_t));
-    if (ctx == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-    *(ngx_rtmp_conf_ctx_t **) conf = ctx;
-
-    /* count the number of the rtmp modules and set up their indices */
-    /* 计算RTMP模块总数，并为模块编号 */
-
-    ngx_rtmp_max_module = 0;
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        ngx_modules[m]-&gt;ctx_index = ngx_rtmp_max_module++;
-    }
-
-
-    /* the rtmp main_conf context, it is the same in the all rtmp contexts */
-    /* 再次强调，创建main_conf上下文变量，全局唯一 */
-    ctx-&gt;main_conf = ngx_pcalloc(cf-&gt;pool,
-                                 sizeof(void *) * ngx_rtmp_max_module);// 这里使用了max创建数组
-    if (ctx-&gt;main_conf == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-
-    /*
-     * the rtmp null srv_conf context, it is used to merge
-     * the server{}s&apos; srv_conf&apos;s
-     * 创建srv_conf上下文变量
-     */
-
-    ctx-&gt;srv_conf = ngx_pcalloc(cf-&gt;pool, sizeof(void *) * ngx_rtmp_max_module);
-    if (ctx-&gt;srv_conf == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-
-    /*
-     * the rtmp null app_conf context, it is used to merge
-     * the server{}s&apos; app_conf&apos;s
-     * 创建app_conf上下文变量
-     */
-
-    ctx-&gt;app_conf = ngx_pcalloc(cf-&gt;pool, sizeof(void *) * ngx_rtmp_max_module);
-    if (ctx-&gt;app_conf == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-
-    /*
-     * create the main_conf&apos;s, the null srv_conf&apos;s, and the null app_conf&apos;s
-     * of the all rtmp modules
-     */
-    /* 遍历所有的RTMP模块，保证所有模块对应的conf不为空 */
-
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        module = ngx_modules[m]-&gt;ctx;
-        mi = ngx_modules[m]-&gt;ctx_index;
-
-        // 分别调用各模块的:
-        // create_main_conf，
-        // create_srv_conf
-        // create_app_conf
-        if (module-&gt;create_main_conf) {
-            ctx-&gt;main_conf[mi] = module-&gt;create_main_conf(cf);
-            if (ctx-&gt;main_conf[mi] == NULL) {
-                return NGX_CONF_ERROR;
-            }
-        }
-
-        if (module-&gt;create_srv_conf) {
-            ctx-&gt;srv_conf[mi] = module-&gt;create_srv_conf(cf);
-            if (ctx-&gt;srv_conf[mi] == NULL) {
-                return NGX_CONF_ERROR;
-            }
-        }
-
-        if (module-&gt;create_app_conf) {
-            ctx-&gt;app_conf[mi] = module-&gt;create_app_conf(cf);
-            if (ctx-&gt;app_conf[mi] == NULL) {
-                return NGX_CONF_ERROR;
-            }
-        }
-    }
-
-    // 备份ngx_conf_t，在rtmp{}块解析完成后恢复
-    pcf = *cf;
-    cf-&gt;ctx = ctx;
-
-    // 调用各RTMP模块的preconfiguration
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        module = ngx_modules[m]-&gt;ctx;
-
-        if (module-&gt;preconfiguration) {
-            if (module-&gt;preconfiguration(cf) != NGX_OK) {
-                return NGX_CONF_ERROR;
-            }
-        }
-    }
-
-    /* parse inside the rtmp{} block */
-    /* 进入rtmp{}块中继续解析配置，仅解析cmd_type=NGX_RTMP_MAIN_CONF的指令，比如server{}块。
-     * 这里要回顾一下ngx_rtmp_conf_ctx_t结构体，因为接下来的解析过程，实际上就是填充这三个结构体的过程。
-     * 结构体包括三个数组，分别是main_conf，srv_conf和app_conf，
-     * main_conf实际上一个ngx_rtmp_*_main_conf_t的数组，其中最重要的可能就是core模块的结构，
-
-        typedef struct {
-            ngx_array_t             servers;    // ngx_rtmp_core_srv_conf_t 
-            ngx_array_t             listen;     // ngx_rtmp_listen_t 
-
-            ngx_array_t             events[NGX_RTMP_MAX_EVENT];
-
-            ngx_hash_t              amf_hash;
-            ngx_array_t             amf_arrays;
-            ngx_array_t             amf;
-        } ngx_rtmp_core_main_conf_t;
-
-     * 解析到的server{}块配置会保存到core模块的servers数组中
-     * 同样的，srv_conf是一个ngx_rtmp_*_srv_main_t的数组，其中最重要的是core模块中针对server配置的结构体，
-
-        typedef struct ngx_rtmp_core_srv_conf_s {
-            ngx_array_t             applications; // ngx_rtmp_core_app_conf_t
-            ...            
-            ngx_rtmp_conf_ctx_t    *ctx;
-        } ngx_rtmp_core_srv_conf_t;
-
-     * 解析到的application{}块会保存到相应server块的applications数组中 */
-
-    cf-&gt;module_type = NGX_RTMP_MODULE;
-    cf-&gt;cmd_type = NGX_RTMP_MAIN_CONF;
-    rv = ngx_conf_parse(cf, NULL);
-
-    if (rv != NGX_CONF_OK) {
-        *cf = pcf;
-        return rv;
-    }
-
-
-    /* init rtmp{} main_conf&apos;s, merge the server{}s&apos; srv_conf&apos;s */
-
-    // cmcf =&gt; core module conf
-    cmcf = ctx-&gt;main_conf[ngx_rtmp_core_module.ctx_index];
-    cscfp = cmcf-&gt;servers.elts;
-
-    /* 合并各RTMP模块配置 
-     * 这里的合并有一点需要注意的是，core模块的配置必须首先被合并，这个通过写config文件来实现，只有这样，才能保证上一轮解析中的配置全部合并到ctx的三大数组中。
-     * 跟模块不在这一轮合并中出现，因为根模块的类型不是NGX_RTMP_MODULE而是NGX_CORE_MODULE
-     */
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        module = ngx_modules[m]-&gt;ctx;
-        // mi =&gt; module_index
-        mi = ngx_modules[m]-&gt;ctx_index;
-
-        /* init rtmp{} main_conf&apos;s */
-        /* 调用各main模块的init_main_conf */
-
-        cf-&gt;ctx = ctx;
-
-        // 调用各RTMP main模块的init_main_conf，因为全局统一使用一个main_conf数组，因此这里不需要“merge”
-        if (module-&gt;init_main_conf) {
-            rv = module-&gt;init_main_conf(cf, ctx-&gt;main_conf[mi]);
-            if (rv != NGX_CONF_OK) {
-                *cf = pcf;
-                return rv;
-            }
-        }
-
-        /* 分别调用各模块merge_srv_conf和merge_app_conf，如果需要的话
-         * ngx_parse_conf产生的servers用在这里*/
-        for (s = 0; s &lt; cmcf-&gt;servers.nelts; s++) {
-
-            /* merge the server{}s&apos; srv_conf&apos;s */
-
-            cf-&gt;ctx = cscfp[s]-&gt;ctx;
-
-            if (module-&gt;merge_srv_conf) {
-                rv = module-&gt;merge_srv_conf(cf,
-                                            ctx-&gt;srv_conf[mi],
-                                            cscfp[s]-&gt;ctx-&gt;srv_conf[mi]);
-                if (rv != NGX_CONF_OK) {
-                    *cf = pcf;
-                    return rv;
-                }
-            }
-
-            if (module-&gt;merge_app_conf) {
-
-                /* merge the server{}&apos;s app_conf */
-
-                /*ctx-&gt;app_conf = cscfp[s]-&gt;ctx-&gt;loc_conf;*/
-
-                rv = module-&gt;merge_app_conf(cf, 
-                                            ctx-&gt;app_conf[mi],
-                                            cscfp[s]-&gt;ctx-&gt;app_conf[mi]);
-                if (rv != NGX_CONF_OK) {
-                    *cf = pcf;
-                    return rv;
-                }
-
-                /* merge the applications{}&apos; app_conf&apos;s 
-                 * 解析applications数组
-                 * cscfp = core server conf pointer*/
-
-                cscf = cscfp[s]-&gt;ctx-&gt;srv_conf[ngx_rtmp_core_module.ctx_index];
-
-                /* 递归的解析applications数组，因为application有可能有子块，比如recorder{}块 */
-                rv = ngx_rtmp_merge_applications(cf, &amp;cscf-&gt;applications,
-                                            cscfp[s]-&gt;ctx-&gt;app_conf,
-                                            module, mi);
-                if (rv != NGX_CONF_OK) {
-                    *cf = pcf;
-                    return rv;
-                }
-            }
-
-        }
-    }
-
-
-    /* 初始化events数组和amf数组 */
-    if (ngx_rtmp_init_events(cf, cmcf) != NGX_OK) {
-        return NGX_CONF_ERROR;
-    }
-
-    /* 调用各RTMP模块的postconfiguration */
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        module = ngx_modules[m]-&gt;ctx;
-
-        if (module-&gt;postconfiguration) {
-            if (module-&gt;postconfiguration(cf) != NGX_OK) {
-                return NGX_CONF_ERROR;
-            }
-        }
-    }
-
-    // 恢复conf
-    *cf = pcf;
-
-    /* 初始化RTMP各事件响应函数，AMF各事件响应函数及hash表 */
-    if (ngx_rtmp_init_event_handlers(cf, cmcf) != NGX_OK) {
-        return NGX_CONF_ERROR;
-    }
-
-    /* 初始化端口数组 */
-    if (ngx_array_init(&amp;ports, cf-&gt;temp_pool, 4, sizeof(ngx_rtmp_conf_port_t))
-        != NGX_OK)
-    {
-        return NGX_CONF_ERROR;
-    }
-
-    listen = cmcf-&gt;listen.elts;
-
-    // 添加listen地址到port数组
-    for (i = 0; i &lt; cmcf-&gt;listen.nelts; i++) {
-        if (ngx_rtmp_add_ports(cf, &amp;ports, &amp;listen[i]) != NGX_OK) {
-            return NGX_CONF_ERROR;
-        }
-    }
-
-    /* 将port中的监听地址添加到nginx的监听列表 */
-    return ngx_rtmp_optimize_servers(cf, &amp;ports);
-}
-</code></pre><p>仅看根模块的rtmp{}块解析还无法全面了解配置解析过程，下面贴出另一个重要模块，core模块，的server{}块和applicaiton{}块解析过程，他们在ngx_rtmp_core_module.c中。</p>
-<pre><code>static char *
-ngx_rtmp_core_server(ngx_conf_t *cf, ngx_command_t *cmd, void *conf/*srv_conf*/)
-{
-    char                       *rv;
-    void                       *mconf;
-    ngx_uint_t                  m;
-    ngx_conf_t                  pcf;
-    ngx_rtmp_module_t          *module;
-    ngx_rtmp_conf_ctx_t        *ctx, *rtmp_ctx;
-    ngx_rtmp_core_srv_conf_t   *cscf, **cscfp;
-    ngx_rtmp_core_main_conf_t  *cmcf;
-
-    // 每解析到一个server就创建一个新的conf_ctx
-    ctx = ngx_pcalloc(cf-&gt;pool, sizeof(ngx_rtmp_conf_ctx_t));
-    if (ctx == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-    rtmp_ctx = cf-&gt;ctx;
-    // 使用rtmp级conf_ctx的main_conf覆盖新建的本server的main_conf，以保证唯一的main_conf数组
-    ctx-&gt;main_conf = rtmp_ctx-&gt;main_conf;
-
-    /* the server{}&apos;s srv_conf */
-    /* 为srv_conf和app_conf申请内存 */
-
-    ctx-&gt;srv_conf = ngx_pcalloc(cf-&gt;pool, sizeof(void *) * ngx_rtmp_max_module);
-    if (ctx-&gt;srv_conf == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-    ctx-&gt;app_conf = ngx_pcalloc(cf-&gt;pool, sizeof(void *) * ngx_rtmp_max_module);
-    if (ctx-&gt;app_conf == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-    // 初始化srv_conf和app_conf
-    // 调用各RTMP模块的create_srv_conf和create_app_conf
-    for (m = 0; ngx_modules[m]; m++) {
-        if (ngx_modules[m]-&gt;type != NGX_RTMP_MODULE) {
-            continue;
-        }
-
-        module = ngx_modules[m]-&gt;ctx;
-
-        if (module-&gt;create_srv_conf) {
-            mconf = module-&gt;create_srv_conf(cf);
-            if (mconf == NULL) {
-                return NGX_CONF_ERROR;
-            }
-
-            ctx-&gt;srv_conf[ngx_modules[m]-&gt;ctx_index] = mconf;
-        }
-
-        if (module-&gt;create_app_conf) {
-            mconf = module-&gt;create_app_conf(cf);
-            if (mconf == NULL) {
-                return NGX_CONF_ERROR;
-            }
-
-            ctx-&gt;app_conf[ngx_modules[m]-&gt;ctx_index] = mconf;
-        }
-    }
-
-    /* the server configuration context */
-    /* 将新申请的conf_ctx放入main_conf的servers数组
-     * servers数组是ngx_rtmp_core_srv_conf_t的集合*/
-    cscf = ctx-&gt;srv_conf[ngx_rtmp_core_module.ctx_index];
-    cscf-&gt;ctx = ctx; // 自我链接，用于下一步放入servers
-    /* 至此，解析server{}块配置的过程实际上就结束了，需要合并配置时，main_conf[core_module]-&gt;servers[...]-&gt;ctx-&gt;srv_conf[core_module]即可找到每一server{}块的配置，
-     * application{}块的解析也同样如此，不同的时application块中也有applications[]数组，因此需要递归的合并子模块的配置
-     */
-
-    cmcf = ctx-&gt;main_conf[ngx_rtmp_core_module.ctx_index];
-
-    cscfp = ngx_array_push(&amp;cmcf-&gt;servers);/* 由于main_conf是直接覆盖而非另外生成，因此这里放入的servers数组就是输入的main_conf */
-    if (cscfp == NULL) {
-        return NGX_CONF_ERROR;
-    }
-
-    *cscfp = cscf;
-
-    /* parse inside server{} 
-     * 进入server{}块内部继续解析，这里仅解析NGX_RTMP_SRV_CONF类型的命令，包括listen和application等命令。
-    */
-
-    pcf = *cf;
-    cf-&gt;ctx = ctx;
-    cf-&gt;cmd_type = NGX_RTMP_SRV_CONF;
-
-    rv = ngx_conf_parse(cf, NULL);
-
-    *cf = pcf;
-
-    return rv;
-}
-</code></pre><h3 id="TODO-接受PUSH-RTMP流："><a href="#TODO-接受PUSH-RTMP流：" class="headerlink" title="TODO 接受PUSH RTMP流："></a>TODO 接受PUSH RTMP流：</h3><p>##参考：<br>Nginx模块开发入门 <a href="http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/intro-of-nginx-module-development.html</a></p>
-<p>Emiller’s Guide To Nginx Module Development <a href="http://www.evanmiller.org/nginx-modules-guide.html" target="_blank" rel="noopener">http://www.evanmiller.org/nginx-modules-guide.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/07/23/nginx-rtmp-module-summary/" data-id="cjegmyn690003qsfo91zuv9pt" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rtmp/">rtmp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-delpoy-bottle-to-gae" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/07/20/delpoy-bottle-to-gae/" class="article-date">
-  <time datetime="2013-07-19T16:00:00.000Z" itemprop="datePublished">2013-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/07/20/delpoy-bottle-to-gae/">Delpoy Bottle To GAE</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>创建framework目录，并创建framework/<strong>init</strong>.py文件，拷贝bottle.py到framework/中</li>
-<li><p>修改app.yaml如下：</p>
-<pre><code>application: YOUR_APP_NAME
-version: 1
-runtime: python27
-api_version: 1
-threadsafe: yes
-
-handlers:
-    - url: /favicon\.ico
-      static_files: favicon.ico
-      upload: favicon\.ico
-
-    - url: /.*
-      script: main.app
-</code></pre></li>
-</ol>
-<ol>
-<li><p>修改main.py如下：</p>
-<pre><code>#!/usr/bin/env python
-from framework import bottle
-from framework.bottle import *
-
-app = Bottle()
-@app.get(&apos;/&apos;)
-def DisplayForm():
-    return &quot;Hello World&quot;
-
-bottle.run(app=app, server=&apos;gae&apos;)
-</code></pre></li>
-</ol>
-<p>另外，也可以参考<a href="http://petergao.com/blog/using-bottle-with-python2-7-on-google-app-engine/" target="_blank" rel="noopener">这里</a>的介绍。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/07/20/delpoy-bottle-to-gae/" data-id="cjegmyn6b0004qsfoh84rkzv3" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAE/">GAE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bottle/">bottle</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-cpp_standard_library_string_find_and_npos_usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/04/12/cpp_standard_library_string_find_and_npos_usage/" class="article-date">
-  <time datetime="2013-04-11T16:00:00.000Z" itemprop="datePublished">2013-04-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          <a class="icon" target="_blank" href="/">
+            <i class="fab fa-facebook"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/04/12/cpp_standard_library_string_find_and_npos_usage/">std::string::find和std::string::npos的使用备忘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>项目中需要手动解析路径，我的开发机是32位系统，运行无问题，但是部署到64位的生产环境时，解析出现了莫名其妙的错误。<br>翻阅basic_string.h后发现了问题的原因，错误的将std::string:find的结果赋值给unsigned int。</p>
-<pre><code>unsigned int begin; // 注意变量类型！
-std::string test_str = &quot;helloworld&quot;;
-if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 赋值时出现了问题
-{…}
-</code></pre><p>改成如下的形式，问题解决。</p>
-<pre><code>size_t begin; // 注意变量类型！
-std::string test_str = &quot;helloworld&quot;;
-if(std::string::npos != (begin = test_str.find(&quot;/&quot;))) // 问题解决
-{…}
-</code></pre><p>根本原因是basic_string.h将npos定义为size_type的-1。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/04/12/cpp_standard_library_string_find_and_npos_usage/" data-id="cjegmyn6k0006qsfosby0tgwp" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-deps" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/04/03/deps/" class="article-date">
-  <time datetime="2013-04-02T16:00:00.000Z" itemprop="datePublished">2013-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/04/03/deps/">一些.deps文件未更新导致的问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>项目中有一个c文件，需要导入到c++项目中，并改为cpp文件。</p>
-<p>改了Makefile.am中**_SOURCES，用aclocal那一套重新构建了项目，但是编译的时候，make仍然去找原来的c文件，而不是已经改名的cpp文件。</p>
-<p>反复确认后发现，项目目录下的.deps目录下相应的.Po文件中的依赖关系没有跟随**_SOURCES更新，删除.deps文件夹，重新make，问题解决。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/04/03/deps/" data-id="cjegmyn680002qsfo0f1l8dtn" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-unreliable-backtrace" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/04/01/unreliable-backtrace/" class="article-date">
-  <time datetime="2013-03-31T16:00:00.000Z" itemprop="datePublished">2013-04-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          <a class="icon" target="_blank" href="/">
+            <i class="fab fa-linkedin"></i><!--
+      ---></a><!--
+    ---><!--
+    ---> and 
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/04/01/unreliable-backtrace/">不靠谱的backtrace</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <p>#起因<br>今天遇到一个问题，程序收到abort信号后退出，打开core文件后很快定位到目标代码，但是很奇怪的是目标代码似乎没有问题，反而是目标代码附近的代码看起来比较可疑。<br>增加日志后调试发现确实如此，backtrace报告的代码不是真正出问题的代码。</p>
-<p>#重现</p>
-<pre><code>#include &quot;base.h&quot;
-#include &quot;stdio.h&quot;
-boost::shared_ptr&lt;std::string&gt; err_str;
-boost::shared_ptr&lt;std::string&gt; normal_str2;
-int main(int argc, char **argv)
-{
-    err_str.reset();
-    normal_str2 = boost::shared_ptr&lt;std::string&gt;(new std::string);
-    *normal_str2 = &quot;test&quot;;
-    printf(&quot;before\n&quot;);
-    std::string l_test_str = *(err_str); // !!!
-    printf(&quot;after\n&quot;);
-    printf(&quot;%c\n&quot;, normal_str2-&gt;at(0));
-    return 0;
-}
-</code></pre><p>上面代码的错误很明显，使用＊获取一个空指针的值，会导致BOOST_ASSERT失败，程序会因abort信号而退出。在我的机器上，gdb告诉我，是reset的那行代码出了问题，真让人摸不着头脑。当然before还是会打印出来的。</p>
-<pre><code>#include &quot;base.h&quot;
-#include &quot;stdio.h&quot;
-boost::shared_ptr&lt;std::string&gt; err_str;
-boost::shared_ptr&lt;std::string&gt; normal_str2;
-int main(int argc, char **argv)
-{
-    err_str.reset();
-    normal_str2 = boost::shared_ptr&lt;std::string&gt;(new std::string);
-    *normal_str2 = &quot;test&quot;;
-    printf(&quot;before\n&quot;);
-    assert(err_str.get()); // !!!
-    printf(&quot;after\n&quot;);
-    printf(&quot;%c\n&quot;, normal_str2-&gt;at(0));
-    return 0;
-}
-</code></pre><p>上面的代码会在错误行abort，并且backtrace给出的行号是正确的。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>相信日志吧！backtrace仅供参考。<br>本人能力有限，目前只能怀疑是＊操作破坏了栈，导致backtrace报告了错误的代码位置。有心的朋友可以用objdump看看汇编代码，若找到真正原因，希望也能和我分享。谢谢！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/04/01/unreliable-backtrace/" data-id="cjegmyn5w0000qsfo4opj09pg" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-new-post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/03/26/new-post/" class="article-date">
-  <time datetime="2013-03-25T16:00:00.000Z" itemprop="datePublished">2013-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/03/26/new-post/">new post</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+          <a class="icon" target="_blank" href="mailto:name@email.com">
+            <i class="fas fa-envelope"></i><!--
+      ---></a><!--
+      ---><!--
+    --->.
+        
       
-        <p>My first post on Jekyll blog.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://sqbing.github.io/2013/03/26/new-post/" data-id="cjegmyn620001qsfoai1mvc4b" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
+    </p>
   
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 </section>
+
+<section id="writing">
+  <span class="h1"><a href="/archives">Writing</a></span>
+  <ul class="post-list">
+    
+      
+    
+    
+      <li class="post-item">
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAE/">GAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HLS/">HLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OTG/">OTG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bottle/">bottle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fanfou/">fanfou</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/librtmp/">librtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read-json/">read_json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtmp/">rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threadsafe/">threadsafe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xauth/">xauth</a></li></ul>
+    <div class="meta">
+        <time datetime="2018-03-07T05:18:09.000Z" itemprop="datePublished">2018-03-07</time>
     </div>
-  </div>
 
 
-  
+        <span>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/GAE/" style="font-size: 10px;">GAE</a> <a href="/tags/HLS/" style="font-size: 10px;">HLS</a> <a href="/tags/Nexus/" style="font-size: 10px;">Nexus</a> <a href="/tags/OTG/" style="font-size: 10px;">OTG</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/boost/" style="font-size: 10px;">boost</a> <a href="/tags/bottle/" style="font-size: 10px;">bottle</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/fanfou/" style="font-size: 10px;">fanfou</a> <a href="/tags/ffmpeg/" style="font-size: 20px;">ffmpeg</a> <a href="/tags/librtmp/" style="font-size: 10px;">librtmp</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/property-tree/" style="font-size: 10px;">property_tree</a> <a href="/tags/read-json/" style="font-size: 10px;">read_json</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/threadsafe/" style="font-size: 10px;">threadsafe</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/xauth/" style="font-size: 10px;">xauth</a>
+        <a class="" href="/2018/03/07/migrate-to-hexo/">migrate to hexo</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+        <time datetime="2015-12-21T16:00:00.000Z" itemprop="datePublished">2015-12-22</time>
     </div>
-  </div>
 
-  
+
+        <span>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/04/">April 2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a></li></ul>
+        <a class="" href="/2015/12/22/cpp-cast/">C++ cast备忘</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+        <time datetime="2015-03-31T16:00:00.000Z" itemprop="datePublished">2015-04-01</time>
     </div>
-  </div>
 
 
-  
+        <span>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
-    <div class="widget">
+        <a class="" href="/2015/04/01/android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+        <time datetime="2014-06-23T16:00:00.000Z" itemprop="datePublished">2014-06-24</time>
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2014/06/24/MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+        <time datetime="2014-06-23T16:00:00.000Z" itemprop="datePublished">2014-06-24</time>
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2014/06/24/HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
+    
+
+
+</span>
+      </li>
+    
+  </ul>
+  
+</section>
+
+
+
+    </div>
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 [object Object]
+  </div>
+  <div class="footer-right">
+    <nav>
       <ul>
-        
-          <li>
-            <a href="/2018/03/07/migrate-to-hexo/">migrate to hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/22/cpp-cast/">C++ cast备忘</a>
-          </li>
-        
-          <li>
-            <a href="/2015/04/01/android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
-          </li>
-        
-          <li>
-            <a href="/2014/06/24/MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
-          </li>
-        
-          <li>
-            <a href="/2014/06/24/HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
-          </li>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 [object Object]<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    </nav>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-  </div>
 </body>
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
