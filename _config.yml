@@ -87,6 +87,11 @@ theme: cactus
 deploy:
   type:
 
+# For cactus
+## Refer to https://github.com/probberechts/hexo-theme-cactus
 disqus:
   enable: true
   shortname: sqbingongithub
+
+social_links:
+  github: http://github.com/sqbing
