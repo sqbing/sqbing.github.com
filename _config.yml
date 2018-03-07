@@ -5,7 +5,7 @@
 # Site
 subtitle:
 description:
-language:
+language: en
 timezone:
 title : 早起
 tagline: Software development
@@ -80,9 +80,13 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+disqus:
+  enable: true
+  shortname: sqbingongithub
