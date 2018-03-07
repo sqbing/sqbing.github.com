@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Fix: Nexus 7(2013) Wifi OTG Storage Issue | 早起</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="解决二代N7无法使用OTG存储设备的问题">
+<meta name="keywords" content="Nexus,OTG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fix: Nexus 7(2013) Wifi OTG Storage Issue">
+<meta property="og:url" content="http://sqbing.github.io/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/index.html">
+<meta property="og:site_name" content="早起">
+<meta property="og:description" content="解决二代N7无法使用OTG存储设备的问题">
+<meta property="og:updated_time" content="2018-03-07T02:21:34.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fix: Nexus 7(2013) Wifi OTG Storage Issue">
+<meta name="twitter:description" content="解决二代N7无法使用OTG存储设备的问题">
+  
+    <link rel="alternate" href="/atom.xml" title="早起" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">早起</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sqbing.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2013-09-29-fix-nexus-7-2013-otg-storage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/" class="article-date">
+  <time datetime="2018-03-06T08:20:10.303Z" itemprop="datePublished">2018-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Fix: Nexus 7(2013) Wifi OTG Storage Issue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需要安装Nexus Photo Viewer(<a href="https://play.google.com/store/apps/details?id=com.homeysoft.nexususb.viewer" target="_blank" rel="noopener">Google Play</a>)，依据软件开发者的博客(<a href="http://nexususb.blogspot.com/" target="_blank" rel="noopener">blogspot</a>)提供的解决方案即可解决。</p>
+<p>下面是软件开发者提供的解决步骤：</p>
+<ol>
+<li>Hold the device in Portrait Mode（竖屏）</li>
+<li>Open Android Settings and make the following <strong>temporary</strong> changes（以下步骤修改的配置，可在问题解决后恢复）</li>
+<li>Under Security -&gt; Lock Screen.  Select None（取消密码、图案锁屏等）</li>
+<li>Under Accessibility -&gt; Auto-rotate screen.  Make sure it is NOT checked（取消自动旋转屏幕）</li>
+<li><strong>(Nexus 7 2013 Only)</strong> Under Language and input -&gt; English (United States)（<strong>语言改为美式英文</strong>）</li>
+<li>Open NMI/NPV manually via the icon.（打开Nexus Photo Viewer）</li>
+<li>Connect the OTG and Flash/Pen Drive（连接OTS存储设备）</li>
+<li>Press and Hold Power until you see “Power Off”（关机）</li>
+<li>Tap OK to Power Off</li>
+<li>Power On（开机）</li>
+<li>Repeat steps 8-10 until you see this prompt or NMI opens automatically.  If you have repeated this more than 5 times see below.*（重复8～10，直到Nexus Photo Viewer开机自动打开，并且可以浏览OTG存储设备内容，软件开发者博客提供了效果图）</li>
+</ol>
+<hr>
+<p>2013-10-10 更新</p>
+<p>按照上述方法虽然能够解决二代N7的OTG存储设备使用问题，但是会导致机器<strong>极其不稳定</strong>。</p>
+<p>这种不稳定将直接导致机器<strong>重启</strong>，并在重启之后恢复正常，当然OTG功能又不见了……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sqbing.github.io/2018/03/06/2013-09-29-fix-nexus-7-2013-otg-storage/" data-id="cjeggjf0k000btwfopu9rmyef" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OTG/">OTG</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/06/2013-09-30-fix-ffmpeg-librtmp-not-found/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Fix: librtmp not found in ffmpeg
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/06/2013-09-26-something-about-nginx-and-hls/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Something About Nginx and HLS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAE/">GAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HLS/">HLS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OTG/">OTG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boost/">boost</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bottle/">bottle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fanfou/">fanfou</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/librtmp/">librtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-tree/">property_tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/read-json/">read_json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtmp/">rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threadsafe/">threadsafe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xauth/">xauth</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GAE/" style="font-size: 10px;">GAE</a> <a href="/tags/HLS/" style="font-size: 10px;">HLS</a> <a href="/tags/Nexus/" style="font-size: 10px;">Nexus</a> <a href="/tags/OTG/" style="font-size: 10px;">OTG</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/boost/" style="font-size: 10px;">boost</a> <a href="/tags/bottle/" style="font-size: 10px;">bottle</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/fanfou/" style="font-size: 10px;">fanfou</a> <a href="/tags/ffmpeg/" style="font-size: 20px;">ffmpeg</a> <a href="/tags/librtmp/" style="font-size: 10px;">librtmp</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/property-tree/" style="font-size: 10px;">property_tree</a> <a href="/tags/read-json/" style="font-size: 10px;">read_json</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/rtmp/" style="font-size: 10px;">rtmp</a> <a href="/tags/threadsafe/" style="font-size: 10px;">threadsafe</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/xauth/" style="font-size: 10px;">xauth</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/06/2015-12-22-cpp-cast/">C++ cast备忘</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/2015-04-01-android-pre-compiler-error/">Errors running builder &#39;Android Pre Compiler&#39; on project</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/2014-06-24-MP4-to-HLS-based-on-nginx-http-mp4-module/">MP4 to HLS based on nginx-http-mp4-module</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/2014-06-24-HTTP-Live-Streaming-notes/">HTTP Live Streaming 笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/2013-11-27-xauth_with_node/">Node&#39;s XAuth Support</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 [object Object]<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
