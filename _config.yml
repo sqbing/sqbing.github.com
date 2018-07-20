@@ -10,12 +10,12 @@ timezone:
 title : 早起
 tagline: Software development
 author :
-  name : Been Woo
+  name : Rider Wu
   email : sqbing@gmail.com
   github : sqbing
-  twitter : sqbing
-  feedburner : feedname
-  about_path : /
+  #twitter : sqbing
+  #feedburner : feedname
+  #about_path : /
   linkedin: beenwoo
 
 # URL
@@ -86,12 +86,3 @@ theme: cactus
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
-
-# For cactus
-## Refer to https://github.com/probberechts/hexo-theme-cactus
-disqus:
-  enable: true
-  shortname: sqbingongithub
-
-social_links:
-  github: http://github.com/sqbing

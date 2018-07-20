@@ -5,7 +5,7 @@
 # Link to a page that gives an overview of all your projects.
 # This can be an external link (e.g., to you GitHub profile) or to another
 # page within your website.
-projects_url: http://github.com/probberechts
+projects_url: https://github.com/sqbing
 
 # Configure the navigation menu.
 # A pair 'Key: url' will result in a link to 'url' with the name 'Key' in the
@@ -13,9 +13,7 @@ projects_url: http://github.com/probberechts
 # languages/*.yml
 nav:
   home: /
-  about: /about/
   articles: /archives/
-  projects: projects_url
 
 
 # Links to your social media accounts.
@@ -23,11 +21,7 @@ nav:
 # (see https://fontawesome.com/icons?d=gallery&s=brands);
 # only 'mail' is an exception.
 social_links:
-  github: http://github.com/probberechts/cactus-dark
-  twitter: /
-  facebook: /
-  linkedin: /
-  mail: mailto:name@email.com
+  github: https://github.com/sqbing
 
 
 # Customize the overview with the most recent blog posts on the index page.
@@ -55,7 +49,7 @@ logo:
   width: 50
   height: 50
   url: /images/logo.png
-  gravatar: false
+  gravatar: true
 
 # Customize the favicons.
 # Cactus supports a limited set of the three most important icons:
@@ -69,13 +63,13 @@ logo:
 favicon: 
   desktop:
     url: /images/favicon.ico
-    gravatar: false
+    gravatar: true
   android:
     url: /images/favicon-192x192.png
-    gravatar: false
+    gravatar: true
   apple:
     url: /images/apple-touch-icon.png
-    gravatar: false
+    gravatar: true
 
 # The color scheme that should be used to highlight codeblocks.
 # See source/css/_highlight for a list of all available color schemes.
@@ -84,7 +78,7 @@ highlight: rainbow
 # Set the color scheme.
 # Available color schemes are 'dark', 'light', 'classic' and 'white'.
 # Alternatively, add your own custom color scheme to source/css/_colors.
-colorscheme: dark
+colorscheme: classic
 
 # Maximal width of the page in rem units.
 page_width: 48
@@ -111,15 +105,15 @@ open_graph:
 
 # Fill in your Disqus Comments Shortname to enable Disqus comments.
 disqus: 
-  enabled: false
-  shortname: cactus-1
+  enabled: true
+  shortname: sqbingongithub
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics: 
-  enabled: false
-  id: UA-86660611-1
+  enabled: true
+  id: UA-44682525-1
 
 # Fill in you Gravatar user id / email if you want to use your gravatar as the
 # logo and/or favicons of you website.
 gravatar:
-  email: name@email.com
+  email: sqbing@gmail.com
