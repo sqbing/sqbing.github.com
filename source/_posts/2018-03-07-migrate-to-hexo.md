@@ -15,4 +15,5 @@ hexo把静态生成的文件放到了public文件夹里，导致无法用一个r
 1. 在 `/source/_posts/` 创建新的 `.md` 文档，或者运行 `hexo new post`；
 2. 运行 `hexo serve` 查看新的文档；
 3. 运行 `hexo generate` 生成新的 `.html` 文档；
-3. 提交新的 `.md` 文档到GitHub；
+4. 提交新的 `.md` 文档到GitHub；
+5. 切换到 `master` 分支，拷贝所有 `/public` 目录下的文件到 `/` ，并提交修改到GitHub。
