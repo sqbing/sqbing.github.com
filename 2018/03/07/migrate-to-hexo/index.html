@@ -6,32 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。">
+    <meta name="description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。 ====== 如何创建新文档 在 /source/_posts/ 创建新的 .md 文档，或者运行 hexo n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="migrate to hexo">
 <meta property="og:url" content="http://sqbing.github.io/2018/03/07/migrate-to-hexo/index.html">
 <meta property="og:site_name" content="早起">
-<meta property="og:description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。">
+<meta property="og:description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。 ====== 如何创建新文档 在 /source/_posts/ 创建新的 .md 文档，或者运行 hexo n">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-07T06:11:13.314Z">
+<meta property="og:updated_time" content="2018-07-20T07:54:41.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="migrate to hexo">
-<meta name="twitter:description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。">
+<meta name="twitter:description" content="受够了奇奇怪怪的Jekyll，迁移到hexo。 hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。姑且试试吧。 ====== 如何创建新文档 在 /source/_posts/ 创建新的 .md 文档，或者运行 hexo n">
     
     
         
           
-              <link rel="shortcut icon" href="/images/favicon.ico">
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/21c3957cc77158290328c099e3dd1732?s=16">
           
         
         
           
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/21c3957cc77158290328c099e3dd1732?s=192" sizes="192x192">
           
         
         
           
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/21c3957cc77158290328c099e3dd1732?s=180">
           
         
     
@@ -56,11 +56,7 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </span>
@@ -98,7 +94,7 @@
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何创建新文档"><span class="toc-number">1.</span> <span class="toc-text">如何创建新文档</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -134,9 +130,23 @@
   <div class="content" itemprop="articleBody">
     <p>受够了奇奇怪怪的Jekyll，迁移到hexo。</p>
 <p>hexo把静态生成的文件放到了public文件夹里，导致无法用一个repo同时用于保存.md文件和发布blog。<br>目前的处理方法是额外创建一个branch用于存储.md文件和hexo本身，当前的master分支用于发布blog。<br>姑且试试吧。</p>
+<p>======</p>
+<h1 id="如何创建新文档"><a href="#如何创建新文档" class="headerlink" title="如何创建新文档"></a>如何创建新文档</h1><ol>
+<li>在 <code>/source/_posts/</code> 创建新的 <code>.md</code> 文档，或者运行 <code>hexo new post</code>；</li>
+<li>运行 <code>hexo serve</code> 查看新的文档；</li>
+<li>运行 <code>hexo generate</code> 生成新的 <code>.html</code> 文档；</li>
+<li>提交新的 <code>.md</code> 文档到GitHub；</li>
+<li>切换到 <code>master</code> 分支，拷贝所有 <code>/public</code> 目录下的文件到 <code>/</code> ，并提交修改到GitHub。</li>
+</ol>
 
   </div>
 </article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
 
 
 
@@ -150,17 +160,13 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何创建新文档"><span class="toc-number">1.</span> <span class="toc-text">如何创建新文档</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -192,7 +198,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 [object Object]
+    Copyright &copy; 2018 Rider Wu
   </div>
   <div class="footer-right">
     <nav>
@@ -200,11 +206,7 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
-         
           <li><a href="/archives/">Writing</a></li>
-         
-          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </nav>
@@ -225,6 +227,27 @@
 
 <!-- Google Analytics -->
 
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-44682525-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
 <!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'sqbingongithub';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
 
 
